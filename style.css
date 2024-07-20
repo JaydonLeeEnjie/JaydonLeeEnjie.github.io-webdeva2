@@ -263,6 +263,7 @@ main section.active {
 
 #Quiz {
     display: none; /* Initially hide the quiz section */
+    position:absolute;
 }
 
 #Quiz h2 {

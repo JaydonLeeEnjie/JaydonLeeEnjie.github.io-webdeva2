@@ -18,20 +18,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 return; // Do nothing if the section is already active
             }
             sections.forEach((section) => {
-              if (section.style.display === "block") {
-                section.style.opacity = 0;
-                setTimeout(() => {
-                  section.style.display = "none";
-                }, 500);
-              }
+                if (section.style.display === "block") {
+                    section.style.opacity = 0;
+                    setTimeout(() => {
+                        section.style.display = "none";
+                    }, 500);
+                }
             });
             targetSection.style.display = "block";
             targetSection.style.opacity = 0;
             setTimeout(() => {
-              targetSection.style.opacity = 1;
+                targetSection.style.opacity = 1;
             }, 100);
             navLinks.forEach((otherLink) => {
-              otherLink.classList.remove("active");
+                otherLink.classList.remove("active");
             });
             link.classList.add("active");
             previouslyActiveLink = link;
@@ -90,17 +90,17 @@ document.addEventListener("DOMContentLoaded", () => {
         quizSection.style.display = "none"; // Hide the quiz section
         event.preventDefault();
         sections.forEach((section) => {
-          if (section.style.display === "block") {
-            section.style.opacity = 0;
-            setTimeout(() => {
-              section.style.display = "none";
-            }, 500);
-          }
+            if (section.style.display === "block") {
+                section.style.opacity = 0;
+                setTimeout(() => {
+                    section.style.display = "none";
+                }, 500);
+            }
         });
         gameSection.style.display = "block";
         gameSection.style.opacity = 0;
         setTimeout(() => {
-          gameSection.style.opacity = 1;
+            gameSection.style.opacity = 1;
         }, 100);
         nav.style.display = "none";
     });
@@ -194,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let lives = 3;
     let movableImage;
     let gameOver = false;
-    let spawnInterval = null; // add this variable to store the interval
+    let spawnInterval = null; 
     
     
    
@@ -203,27 +203,27 @@ document.addEventListener("DOMContentLoaded", () => {
     
     function startGame() {
         startButton.disabled = true;
-        startButton.style.display = "none"; // add this line
+        startButton.style.display = "none"; 
         createMovableImage();
         document.addEventListener("mousemove", moveMovableImage);
         document.addEventListener("touchmove", moveMovableImage);
         lives = 3;
         updateLivesDisplay(); // update the lives display
         timeRemaining = 60; // reset the timer
-        timerInterval = setInterval(updateTimer, 1000);
+        timerInterval = setInterval(updateTimer, 1000);//Update the timer
         spawnInterval = setInterval(spawnFallingImage, 1000); // spawn a falling image every 1 second
         gameOver = false;
       
     }
     
     function createMovableImage() {
-      movableImage = document.createElement("img");
-      movableImage.src = "images/brain.png"; // Replace with your movable image file name
-      movableImage.className = "movable-image";
-      movableImage.style.position = "absolute";
-      movableImage.style.top = "85%";
-      movableImage.style.left = "50%";
-      gameArea.appendChild(movableImage);
+        movableImage = document.createElement("img");
+        movableImage.src = "images/brain.png"; // Replace with your movable image file name
+        movableImage.className = "movable-image";
+        movableImage.style.position = "absolute";
+        movableImage.style.top = "85%";
+        movableImage.style.left = "50%";
+        gameArea.appendChild(movableImage);
     }
     let fallingImageInterval = null;
    
@@ -252,7 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
     }
       
-      function moveFallingImageDown(img) {
+    function moveFallingImageDown(img) {
         let top = parseInt(img.style.top, 10);
         top += 5; // move 3 pixels down
         img.style.top = `${top}px`;
@@ -264,11 +264,11 @@ document.addEventListener("DOMContentLoaded", () => {
             // Check for collision with movable image
             checkCollision(img);
         }
-      }
+    }
     
 
       
-      function checkCollision(fallingImage) {
+    function checkCollision(fallingImage) {
         const movableImageRect = movableImage.getBoundingClientRect();
         const fallingImageRect = fallingImage.getBoundingClientRect();
         if (
@@ -283,24 +283,24 @@ document.addEventListener("DOMContentLoaded", () => {
             lives--;
             updateLivesDisplay();
             if (lives <= 0) {
-                 // Time's up! You win!
-                 clearInterval(timerInterval);
-                 const winText = document.createElement("div");
-                 winText.textContent = "You Lose";
-                 winText.style.fontSize = "36px";
-                 winText.style.color = "red";
-                 winText.style.textAlign = "center";
-                 gameArea.appendChild(winText);
-                 const restartButton = document.createElement("button");
-                 restartButton.textContent = "Restart";
-                 restartButton.style.marginTop = "20px";
-                 restartButton.onclick = restartGame;
-                 gameArea.appendChild(restartButton);
-                 startButton.style.display = "none"; // hide the start button
-                 clearInterval(timerInterval);
-                 clearInterval(fallingImageInterval); // stop spawning falling images
-                 gameOver = true;
-                 fallingImages.forEach(img => {
+                // Time's up! You win!
+                clearInterval(timerInterval);
+                const winText = document.createElement("div");
+                winText.textContent = "You Lose";
+                winText.style.fontSize = "36px";
+                winText.style.color = "red";
+                winText.style.textAlign = "center";
+                gameArea.appendChild(winText);
+                const restartButton = document.createElement("button");
+                restartButton.textContent = "Restart";
+                restartButton.style.marginTop = "20px";
+                restartButton.onclick = restartGame;
+                gameArea.appendChild(restartButton);
+                startButton.style.display = "none"; // hide the start button
+                clearInterval(timerInterval);
+                clearInterval(fallingImageInterval); // stop spawning falling images
+                gameOver = true;
+                fallingImages.forEach(img => {
                     clearInterval(img.interval); // stop moving existing falling images
                     gameArea.removeChild(img);
                 });
@@ -314,9 +314,9 @@ document.addEventListener("DOMContentLoaded", () => {
     function moveMovableImage(event) {
         let mouseX;
         if (event.type === "touchmove") {
-          mouseX = event.touches[0].clientX;
+            mouseX = event.touches[0].clientX;
         } else {
-          mouseX = event.clientX;
+            mouseX = event.clientX;
         }
         const newLeft = Math.max(0, Math.min(gameArea.offsetWidth - 40, mouseX - 40)); // keep image within game area
         movableImage.style.left = `${newLeft}px`;
@@ -325,30 +325,27 @@ document.addEventListener("DOMContentLoaded", () => {
         timeRemaining--;
         timerDisplay.textContent = `Time: ${formatTime(timeRemaining)}`;
         if (timeRemaining <= 0) {
-         // Time's up! You win!
-         clearInterval(timerInterval);
-         const winText = document.createElement("div");
-         winText.textContent = "You Win!";
-         winText.style.fontSize = "36px";
-         winText.style.color = "green";
-         winText.style.textAlign = "center";
-         gameArea.appendChild(winText);
-         const restartButton = document.createElement("button");
-         restartButton.textContent = "Restart";
-         restartButton.style.marginTop = "20px";
-         restartButton.onclick = restartGame;
-         gameArea.appendChild(restartButton);
-         startButton.disabled = false;
-         startButton.style.display = "none"; // hide the start button
-       
-         clearInterval(fallingImageInterval); // stop spawning falling images
-         gameOver = true;
-         fallingImages.forEach(img => {
-            clearInterval(img.interval); // stop moving existing falling images
-            gameArea.removeChild(img);
-        });
-       
-        
+            // Time's up! You win!
+            clearInterval(timerInterval);
+            const winText = document.createElement("div");
+            winText.textContent = "You Win!";
+            winText.style.fontSize = "36px";
+            winText.style.color = "green";
+            winText.style.textAlign = "center";
+            gameArea.appendChild(winText);
+            const restartButton = document.createElement("button");
+            restartButton.textContent = "Restart";
+            restartButton.style.marginTop = "20px";
+            restartButton.onclick = restartGame;
+            gameArea.appendChild(restartButton);
+            startButton.disabled = false;
+            startButton.style.display = "none"; // hide the start button
+            clearInterval(fallingImageInterval); // stop spawning falling images
+            gameOver = true;
+            fallingImages.forEach(img => {
+                clearInterval(img.interval); // stop moving existing falling images
+                gameArea.removeChild(img);
+            });
         }
     }
 
@@ -364,27 +361,27 @@ document.addEventListener("DOMContentLoaded", () => {
         lives = 3;
         updateLivesDisplay();
         updateTimer();
-       // Remove the restart button
-       const restartButtons = document.querySelectorAll('.restart-button'); // get all elements with class 'restart-button'
-       restartButtons.forEach(button => button.remove()); // remove each button
+        // Remove the restart button
+        const restartButtons = document.querySelectorAll('.restart-button'); // get all elements with class 'restart-button'
+        restartButtons.forEach(button => button.remove()); // remove each button
         // Show the start button
         startButton.disabled = false;
         startButton.style.display = "block";
         // Clear the game area
         gameArea.innerHTML = "";
-       // Clear the intervals and timeouts
-       clearInterval(timerInterval);
-       timerInterval = null;
-       clearInterval(spawnInterval); // clear the interval that calls spawnFallingImage
-       spawnInterval = null;
-       fallingImages.forEach(img => {
-        clearInterval(img.interval); // stop moving existing falling images
-        clearTimeout(img.timeout); // clear the timeout that removes the image
-        img.remove(); // remove the image from the game area
-       });
-       fallingImages = [];
-       // Reset the game over flag
-       gameOver = false;
+        // Clear the intervals and timeouts
+        clearInterval(timerInterval);
+        timerInterval = null;
+        clearInterval(spawnInterval); // clear the interval that calls spawnFallingImage
+        spawnInterval = null;
+        fallingImages.forEach(img => {
+            clearInterval(img.interval); // stop moving existing falling images
+            clearTimeout(img.timeout); // clear the timeout that removes the image
+            img.remove(); // remove the image from the game area
+        });
+        fallingImages = [];
+        // Reset the game over flag
+        gameOver = false;
      
     }
     navLinks[0].click();
